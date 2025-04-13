@@ -1,0 +1,24 @@
+---
+layout: base
+---
+<article class="post">
+
+  <!-- <header class="post-header">
+    <h1 class="post-title">{{ page.title | escape }}</h1>
+  </header> -->
+
+  <div class="project-grid">
+    {% for project in site.projects %}
+      <div class="project-card">
+        <a href="{{ project.url }}">
+          <h2>{{ project.title }}</h2>
+          <div class="image-wrapper">
+            <img src="{{ project.image }}" alt="{{ project.title }}" class="project-card-image">
+            <div class="overlay-text">{{ project.description }}</div>
+          </div>
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+
+</article>

@@ -1,9 +1,13 @@
 ---
-#
-# By default, content added below the "---" mark will appear in the home page
-# between the top bar and the list of recent posts.
-# To change the home page layout, edit the _layouts/home.html file.
-# See: https://jekyllrb.com/docs/themes/#overriding-theme-defaults
-#
 layout: home
+title: About Me
+image: /assets/images/profile.jpg
 ---
+
+Hi, I'm Jane Doe 👋
+
+I'm an engineer passionate about low-carbon tech, energy systems, and embedded software.
+
+- 🔋 Aerospace & energy background  
+- 💻 Python, microcontrollers, modelling  
+- 🌍 Focused on sustainability
