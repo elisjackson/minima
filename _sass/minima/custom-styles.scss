@@ -60,11 +60,13 @@
 
 
 
+
+
   .about-me-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr auto;
     gap: 2rem;
-    align-items: center;
+    align-items: left;
     margin-top: 2rem;
   }
   
@@ -92,4 +94,14 @@
       margin: 0 auto;
     }
   }
-  
+
+
+
+
+  .post-header img {
+    width: 100%;
+    aspect-ratio: 4 / 1;
+    object-fit: cover;
+    object-position: top;
+    margin-top: 1rem;
+  }
