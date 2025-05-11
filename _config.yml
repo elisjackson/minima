@@ -1,10 +1,10 @@
-title: Elis' Little Projects Space
+title: Elis' projects den
 author:
   name: GitHub User
   email: your-email@domain.com
 
 description: >
-  Thanks for checking out my tiny projects website. Come back for more!
+  A space to share my projects. Thanks for visiting.
 
 theme: minima
 
@@ -25,7 +25,7 @@ minima:
   #     * solarized-light    Light variant of solarized color scheme.
   #     * solarized-dark     Dark variant of solarized color scheme.
   #     * solarized          Adaptive skin for solarized color scheme skins.
-  skin: solarized
+  skin: solarized-light
 
   # Specific pages for site navigation.
   #   If you wish to link only specific pages in the site-navigation, use this and list

@@ -63,23 +63,28 @@
 
 
   .about-me-grid {
-    display: grid;
+    display: flex;
     grid-template-columns: 1fr auto;
     gap: 2rem;
-    align-items: left;
+    align-items: center;
     margin-top: 2rem;
   }
   
   .about-me-text {
+    flex: 1;
     font-size: 1.1rem;
     line-height: 1.6;
   }
   
   .about-me-image img {
+    flex: 1;
+    display: flex;
+    align-items: center;
     width: 100%;
     max-width: 300px;
-    border-radius: 5px;
-    border:#3f4e53 1px solid;
+    aspect-ratio: 1 / 1; /* Ensures the image is square */
+    border-radius: 50%;
+    /*border:#3f4e53 1px solid;*/
     /*box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);*/
   }
   
