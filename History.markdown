@@ -14,6 +14,7 @@
   * Update readme_banner.svg to support dark mode (#813)
   * Add a warning regarding HEAD commit of `master` (#861)
   * Update google analytics README regarding G- and UA- tags (#689)
+  * Fix typo in README (#895)
 
 ### Minor Enhancements
 
@@ -50,6 +51,9 @@
   * Refresh styling of highlighted code snippet blocks (#875)
   * Adapt styles for GFM task-lists (#882)
   * Render link to feed as last item of social-links list (#888)
+  * Adjust colors based on WCAG contrast criterion (#891)
+  * Add styles to be in sync with Jekyll&#39;s `mark_lines` feature (#892)
+  * Improve rendering of pagination pagers (#893)
 
 ### Major Enhancements
 
