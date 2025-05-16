@@ -24,6 +24,31 @@ This didn't *need* to be printed on a PCB; I'd been wanting to learn how to desi
 
 What is an "art silkscreen" I hear you ask? PCBs are made of multiple layers of 'stuff', including the plastic base, the copper, the mask. Finally, you have the silkscreen layer, which is simply the ink on top used as annotation on the board, e.g. "Resistor 1 goes here, Put Diode 2 This Way Around". Some PCB manufacturers (I used JLBPCB) can print multicolour silkscreens - which opens a world of artistic opportunity that I wanted to make use of. After all, I liked the idea of my PCB being totally visible in my room, rather than squirelled away. I also intended to print a few copies and give sunrise alarm clocks as gifts to some friends and family - and the art is just a nice final touch.
 
+# Prototypes: breadboard to proto PCB
+
+{% include video.liquid 
+  path="https://youtube.com/embed/0EiJWLmmgOM" 
+  width="560" 
+  height="315" 
+  caption="Watch this great video!"
+%}
+
+
+
+# Final design: the PCB experience
+
+### Learning the ropes
+
+### Artwork
+
+### Code
+
+### Mistakes
+
+# Next iterations
+
+
+
 # Prototype 1 - a working mess
 
 **ANNOTATED IMAGE**
@@ -52,4 +77,5 @@ Prototype 2 was also built on a TThingy. That's tidier. You may also notice that
 
 ### Mistakes
 
-# The final version
+# Next iterations
+
