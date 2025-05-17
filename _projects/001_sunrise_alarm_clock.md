@@ -7,6 +7,69 @@ permalink: /projects/sunrise-alarm-clock/
 modified_date: 13/04/2025
 ---
 
+**A custom sunrise alarm clock with a little flair, to help me wake up on dark winter mornings. Made in a repeatable way to gift to friends in the same predicament.**
+
+Sunrise alarm clocks emit a gentle light, brightening gradually over a long period of time, emulating the sky's slow transition from night to day. No more sudden awakenings from deep sleep from a clamoring in my ear!
+
+My version would:
+- serve as both an alarm clock, and a normal set of lights for my desk area
+- have some fun lighting modes, and controllable brightness
+- be controllable through my phone or laptop
+- be printed on a PCB for some amount of easy manufacturability
+- ... with an art silkscreen - wanting it to be on display and looking pretty.
+
+# Prototypes: breadboard to proto PCB
+
+Breadboarding started with a spare Pi Pico I had, two NeoPixel LED rings, a logic level shifter (transforming the digital data signals from the Picos' 3.3V to the LEDs' 5V). Buttons would control each LED's 'mode' (Off / Steady white / Raindow dance), and a potentiometer would control all LED's brightness.
+
+Pico code was written in Micropython, and I played around with a few dancing LED ideas to get the hang of coding these.
+
+I had envisaged that the potentiometer might be a good way to control the brightness of the LEDs. However, I found the LEDs would flicker at a fairly high frequency, which was especially visible at low brightness. It worked better as a colour controller.
+
+
+Plotting the potentiometer voltages, it was clear a noisy signal was the culprit. I hoped that bolting everything down in the proto PCB iteration might help with this - but it didn't. At this point, adding a capacitor to smooth the voltages could have been the thing to do.
+
+Instead I decided to do away with the potentiometer and introduce a third push button. Holding it down would initially *increase* the brightness until I let go. On the next hold the brightness would *decrease*, etc. This worked much better (caveat - after dealing with debouncing - more on that later), being based on a digital signal rather than analogue.
+
+I also introduced the WiFi connectivity at this stage, using the Pico 2 W as the microcontroller. A HTTP server runs on the Pico, serving a simple webpage. It allows me to control the LED's modes and brightnesses from my devices, but the very key thing here is that this is where I can set the alarm time!
+
+On setting the alarm time, I wanted some feedback from the lights, both to say **"I got the message"**, and to say **"I'll wake you up at x time!"**. Upon receiving the message, the LEDs first light up the alarm hour (if 3am -> light LEDs at the 12, 1, 2 and 3 o'clock positions), followed by the alarm minute (if 45 past -> light LEDs from 12, 1, through to 9 o'clock).
+
+# Final design: the PCB
+
+At this stage, everything was working as I wanted it. The last thing was to design and print it in PCB form - my first foray into PCB design. KiCAD and a fair amount of YouTube got me through the process. 
+
+I'd imagined doing away with the Pi Pico dev board here - and essentially copy-pasting the necessary Pico components (i.e., the RP2350 microcontroller chip, memory, WiFi chip) from the dev board to my new PCB. This looks feasible - there's actually great documentation about it - but I don't currently have the tools to solder such tiny surface-mount components. So yes, I could have the bits and pieces... but they would remain as a bag of bits!
+
+The Pico therefore slots into the PCB. I changed the LEDs connector types so I could solder one end to the PCB, and added a USB-C port for convenient power.
+
+I added a multicolour silkscreen to my PCBs, designed in Photopea. The idea was to illustrate the sun, half-eclipsed and half in its normal glory. Buttons, and their LED pairs, are annotated in a sci-fi-esque font. The printed version turned out OK but lacked some contrast to make the text pop and and the stars stand out. Something to bear in mind next time.
+
+# MicroPython code
+
+### uasyncio
+
+### Button debouncing
+
+# Learnings & next iterations
+
+### Chips all look the same
+
+Two things here - 
+1. Turns out, chips can look identical and have extremely similar names while doing exactly the opposite thing.
+For the logic level shifters on my PCBs, I mistakenly ordered the *74AHCT14*, not the *74AHCT125*. It took me so long to realise the problem when my built PCBs didn't work, because they look identical, and I had a massive d'oh moment when I realised my mistake.
+
+    The 125 is the level shifter I wanted. The 14 is is a level shifter - great - **and an inverter**. Ah. It literally flips every 1 and 0.
+
+    In vain I tried correcting by re-wiring (adding wires to account for the pinout differences), and updating the code (inverting the inversion - requesting the opposite colour from the LEDs). It *kinda* worked, but not quite. There's no way to “invert” the protocol cleanly with the code I had, as the data line isn’t just logical bits — it’s tightly timed 0 and 1 pulses. So inverting the signal messes with how the LEDs detect where messages begin and end.
+
+2. Despite the low contrast I'm pleased that I went to the trouble of designing and adding my own artwork. I like the idea of technology being visible, rather than hiding behind a facade. It is minimalism in design. Here, the tech is visible and the tech is aesthetic (so I think, at least!). Plus, it's clearly uniquely mine, rather than just some other PCB.
+
+### Power it properly
+
+### Finishing touches
+
+
 # The why
 
 My alarm clock is getting desperate. Two futile attempts to wake this human, on this December morning, have succeeded only in inducing searching arm movements in its vicinity to snooze it. Attempt three almost succeeds but... nah, actually I'll give myself another 10.
@@ -41,11 +104,9 @@ What is an "art silkscreen" I hear you ask? PCBs are made of multiple layers of 
 
 ### Artwork
 
-### Code
+### Python code
 
-### Mistakes
-
-# Next iterations
+### Learnings & next iterations
 
 
 
