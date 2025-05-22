@@ -25,6 +25,16 @@ layout: base
     {% if page.image %}
     <img src="{{ page.image }}" alt="{{ page.title }}" itemprop="image" />
     {% endif %}
+    {% if page.github_links %}
+    <div class="github-buttons">
+      {% for link in page.github_links %}
+        <a class="github-button" href="{{ link.url }}" target="_blank" rel="noopener">
+          <span class="fa-brands fa-github"></span>
+          <span class="button-text">{{ link.label }}</span>
+        </a>
+      {% endfor %}
+    </div>
+    {% endif %}
   </header>
 
   <div>

@@ -1,10 +1,15 @@
 ---
 title: "Sunrise alarm clock"
 description: "This is my first project."
-image: /assets/images/project1.jpg
+image: /assets/images/sunrise_alarm/main_image.png
 layout: project
 permalink: /projects/sunrise-alarm-clock/
 modified_date: 13/04/2025
+github_links:
+  - url: "https://github.com/.../"
+    label: "MicroPython code"
+  - url: "https://github.com/.../"
+    label: "KiCAD files"
 ---
 
 **A custom sunrise alarm clock with a little flair, to help me wake up on dark winter mornings. Made in a repeatable way to gift to friends in the same predicament.**
@@ -20,6 +25,11 @@ My version would:
 
 # Prototypes: breadboard to proto PCB
 
+<figure class="project-figure">
+  <img src="/assets/images/sunrise_alarm/proto_1.jpg" alt="First prototype">
+  <figcaption>Breadboard version - without the second LED string connected</figcaption>
+</figure>
+
 Breadboarding started with a spare Pi Pico I had, two NeoPixel LED rings, a logic level shifter (transforming the digital data signals from the Picos' 3.3V to the LEDs' 5V). Buttons would control each LED's 'mode' (Off / Steady white / Raindow dance), and a potentiometer would control all LED's brightness.
 
 Pico code was written in Micropython, and I played around with a few dancing LED ideas to get the hang of coding these.
@@ -30,6 +40,11 @@ I had envisaged that the potentiometer might be a good way to control the bright
 Plotting the potentiometer voltages, it was clear a noisy signal was the culprit. I hoped that bolting everything down in the proto PCB iteration might help with this - but it didn't. At this point, adding a capacitor to smooth the voltages could have been the thing to do.
 
 Instead I decided to do away with the potentiometer and introduce a third push button. Holding it down would initially *increase* the brightness until I let go. On the next hold the brightness would *decrease*, etc. This worked much better (caveat - after dealing with debouncing - more on that later), being based on a digital signal rather than analogue.
+
+<figure class="project-figure">
+  <img src="/assets/images/sunrise_alarm/proto_2.png" alt="Second prototype">
+  <figcaption>A more permanent test; proto PCB. The fourth button is to replace one where I'd shorted Pico pins while soldering</figcaption>
+</figure>
 
 I also introduced the WiFi connectivity at this stage, using the Pico 2 W as the microcontroller. A HTTP server runs on the Pico, serving a simple webpage. It allows me to control the LED's modes and brightnesses from my devices, but the very key thing here is that this is where I can set the alarm time!
 
@@ -49,6 +64,15 @@ I added a multicolour silkscreen to my PCBs, designed in Photopea. The idea was 
 
 ### uasyncio
 
+The microcontroller needs to handle multiple tasks simultaneously:
+- Serving the webpage
+- Listening for button presses & HTTP requests
+- Changing the state of each LED independently (e.g. on / off / loop through the rainbow / countdown to the alarm time / gradually increase brightness)
+
+On one core, this can't be done in the traditional synchronous Python regieme. Uasyncio allows the same core to juggle multiple tasks, by introducing asynchronous capability to MicroPython.
+
+In my implementation, the code juggles these tasks by jumping between them. Tasks effectively cycle through being active or sleeping for very short periods.
+
 ### Button debouncing
 
 # Learnings & next iterations
@@ -67,27 +91,23 @@ For the logic level shifters on my PCBs, I mistakenly ordered the *74AHCT14*, no
 
 ### Power it properly
 
+USB-C charging is smart - it can deliver a wide voltage and current range. The exact power delievered is negotiated between the device and the charger. If the charger doesn't 'hear from' the device, then the max delivery will be 5V and 1.5A. I wanted my device to take around 48 LEDs in total - meaning I needed more like 3A.
+
+The correct way to negotiate this current would be for the device to literally talk to the charger, continuously. In a USB-C cable (called the 'XXX') there are two wires whose job is to carry these messages back and forth.
+
+In a bit of haste, I decided to shortcut this formal negotiation by wiring 5.1K resistors to ground on the device's XXX pins. This works - 3A can be delivered. The problem is that this misses some of the nuances of negoatiation. If used properly, not only does the device ask, 'can I have 5V and 3A?'; it also asks to the charger, 'are you capable of giving that to me?'. With my resistors, I effectively do the former bu not the latter.
+
+This is fine for chargers that are smart enough - they will just deliver what they can of the requested 3A. However if plugged into a dumber charger, it could overload the charger - which is a bit unsafe. My next iteration would fix this limitation.
+
+### A more suited microcontroller
+
+The Pico is a little overkill, with its XX GPIO pins. A XX with a WiFi chip would be smaller, cheaper, and I'm pretty sure do just as well. Not to mention, fewer headers to solder would have been welcome!
+
+Next time I would also try avoiding using dev boards for the final product, and rather integrating the microcontroller components directly onto my PCB. It wouldn't necessarily make life easier or more convenient, or even save many pennies - but it would make the product more polished, and I'd learn a lot about PCB design and microcntrollers from the process.
+
 ### Finishing touches
 
-
-# The why
-
-My alarm clock is getting desperate. Two futile attempts to wake this human, on this December morning, have succeeded only in inducing searching arm movements in its vicinity to snooze it. Attempt three almost succeeds but... nah, actually I'll give myself another 10.
-
-Feeling sympathy for the clock's case, I decided to bench it entirely - to be replaced by a sunrise alarm clock. (This is surely the magic bullet which will dispel those groggy blue winter mornings). What is a sunrise alarm clock? Well, it's a gradually brightening light, helping to induce a more natural awakening than the rude buzzing of my now yeeted standard alarm.
-
-I was initially inspired by this YouTube video; I'll be loosely following Craig's example with a number of my own tweaks. My version would do the following:
-
-- serve as both a sunrise alarm clock, and a normal set of lights for my desk area
-- have some fun lighting modes and controllable brightness
-- be controllable through my phone or laptop
-- be printed on a PCB, with an art silkscreen
-
-This didn't *need* to be printed on a PCB; I'd been wanting to learn how to design PCBs, and this was a good introduction - more on that later.
-
-What is an "art silkscreen" I hear you ask? PCBs are made of multiple layers of 'stuff', including the plastic base, the copper, the mask. Finally, you have the silkscreen layer, which is simply the ink on top used as annotation on the board, e.g. "Resistor 1 goes here, Put Diode 2 This Way Around". Some PCB manufacturers (I used JLBPCB) can print multicolour silkscreens - which opens a world of artistic opportunity that I wanted to make use of. After all, I liked the idea of my PCB being totally visible in my room, rather than squirelled away. I also intended to print a few copies and give sunrise alarm clocks as gifts to some friends and family - and the art is just a nice final touch.
-
-# Prototypes: breadboard to proto PCB
+A few finish touches remain - lenses to diffuse the light, and improving on the current double sided tape (sounds silly, but it does work quite well) as a method for mounting the PCB to a wall or desk.
 
 {% include video.liquid 
   path="https://youtube.com/embed/0EiJWLmmgOM" 
