@@ -1,12 +1,13 @@
 ---
 title: "Sunrise alarm clock"
-description: "This is my first project."
+description: "A custom sunrise alarm clock with a little flair"
 image: /assets/images/sunrise_alarm/main_image.png
 layout: project
 permalink: /projects/sunrise-alarm-clock/
+date: 22/05/2025
 modified_date: 13/04/2025
 github_links:
-  - url: "https://github.com/.../"
+  - url: "https://github.com/elisjackson/sunrise_alarm_pico_2_w_code"
     label: "MicroPython code"
   - url: "https://github.com/.../"
     label: "KiCAD files"
@@ -51,6 +52,11 @@ I also introduced the WiFi connectivity at this stage, using the Pico 2 W as the
 On setting the alarm time, I wanted some feedback from the lights, both to say **"I got the message"**, and to say **"I'll wake you up at x time!"**. Upon receiving the message, the LEDs first light up the alarm hour (if 3am -> light LEDs at the 12, 1, 2 and 3 o'clock positions), followed by the alarm minute (if 45 past -> light LEDs from 12, 1, through to 9 o'clock).
 
 # Final design: the PCB
+
+<figure class="project-figure">
+  <img src="/assets/images/sunrise_alarm/kicad.png" alt="KiCAD">
+  <figcaption>KiCAD schematic and PCB</figcaption>
+</figure>
 
 At this stage, everything was working as I wanted it. The last thing was to design and print it in PCB form - my first foray into PCB design. KiCAD and a fair amount of YouTube got me through the process. 
 
