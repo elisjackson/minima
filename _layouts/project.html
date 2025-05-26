@@ -22,8 +22,18 @@ layout: base
         </time>
       {%- endif -%}
     </div>
-    {% if page.image %}
-    <img src="{{ page.image }}" alt="{{ page.title }}" itemprop="image" />
+    {% if page.header_image %}
+    <img src="{{ page.header_image }}" alt="{{ page.title }}" itemprop="image" />
+    {% endif %}
+    {% if page.github_links %}
+    <div class="github-buttons">
+      {% for link in page.github_links %}
+        <a class="github-button" href="{{ link.url }}" target="_blank" rel="noopener">
+          <span class="grey fa-brands fa-github fa-lg"></span>
+          <span class="button-text">{{ link.label }}</span>
+        </a>
+      {% endfor %}
+    </div>
     {% endif %}
   </header>
 
