@@ -1,7 +1,7 @@
 ---
 layout: home
 title: Hello
-image: /assets/images/about_me.jpg
+image: /assets/images/about_me.png
 ---
 
 **I'm Elis, and this my projects den.** You may find here projects small, large, problematic, unstarted; projects borne of spur-of-the-moment ideas and taken too far.
