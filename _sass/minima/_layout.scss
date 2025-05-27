@@ -135,13 +135,6 @@
       margin-right: $spacing-unit * 0.5;
     }
   }
-
-  // Mobile
-  @include media-query($on-medium) {
-    .nav-item {
-      padding: 10px 0;
-    }
-  }
 }
 
 
