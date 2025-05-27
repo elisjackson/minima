@@ -17,7 +17,7 @@ github_links:
 **A sunrise alarm clock with a little flair, to help me wake up on dark winter mornings. Easily assembled, to gift to friends in the same predicament.**
 
 {% include video.liquid 
-   path="https://www.youtube.com/embed/BblbdrY1M1g"
+   path="https://www.youtube.com/embed/roLyBcsyGvs?si=yuO3q4sXcNhpY8pf"
    width="560"
    height="315"
 %}
