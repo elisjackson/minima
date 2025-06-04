@@ -1,4 +1,5 @@
 ---
+publish: "true"
 title: "Sunrise alarm clock"
 description: "A custom sunrise alarm clock with a little flair"
 projects_page_image: /assets/images/sunrise_alarm/sunrise-alarm-projects-page.png
