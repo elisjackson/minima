@@ -1,6 +1,6 @@
 ---
-publish: "false"
 title: "Muscle music"
+publish: true
 description: "Generating music from muscle's electrical signals"
 projects_page_image: /assets/images/sunrise_alarm/sunrise-alarm-projects-page.png
 header_image: /assets/images/sunrise_alarm/main_image.png
@@ -15,10 +15,8 @@ github_links:
 
 **A science day outreach project, encouraging kids to learn about neuroscience by generating music by flexing their muscles.**
 
-{% include video.liquid 
-   path="https://www.youtube.com/embed/roLyBcsyGvs?si=yuO3q4sXcNhpY8pf"
-   width="560"
-   height="315"
+{% include video.liquid
+   path="https://www.youtube.com/embed/DrNGoFxOsuQ"
 %}
 
 This is a long term project that I and *Petra Bachanova (link)* have collaborated on. It is a Python program that builds on the Neuron Spikerbox device developed by *Backyard Brains (link)*. You can try it yourself with some previously recorded muscle signals - check out the GitHub repository!
